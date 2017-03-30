@@ -30,13 +30,18 @@ app.put('/todos/:id', function(req, res) {
     var pickedTodo = todo.filter(function(number) {
         return number.id === parseInt(req.params.id);
     });
+    var i = todos.indexOf(pickedTodo[0]);
+    todos[i] = req.body;
     res.send(todos);
 });
 
 app.delete('/todos/:id', function(req, res) {
-    var todoById = req.params.id;
-    todos.splice(todoById, 1);
-    res.send(todos);
+  var pickedTodo = todo.filter(function(number) {
+      return number.id === parseInt(req.params.id);
+  });
+  var i = todos.indexOf(pickedTodo[0]);
+  todos.splice(i, 1);
+  res.send(todos);
 });
 
 //Listener function
